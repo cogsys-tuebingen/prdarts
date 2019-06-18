@@ -93,6 +93,7 @@ def main():
         model = model.cuda()
     else:
         model = model.cuda()
+    logging.info("param count = %d", utils.count_parameters(model))
     logging.info("param size = %fMB", utils.count_parameters_in_MB(model))
 
     criterion = nn.CrossEntropyLoss()

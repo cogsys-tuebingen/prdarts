@@ -15,23 +15,23 @@ class Cell(nn.Module):
             self.preprocess0 = ReLUConvBN(C_prev_prev, C, 1, 1, 0)
         self.preprocess1 = ReLUConvBN(C_prev, C, 1, 1, 0)    
         if reduction:
-            op_names, indices = zip(*genotype.reduce)
+            op_names, op_kwargs, indices = zip(*genotype.reduce)
             concat = genotype.reduce_concat
         else:
-            op_names, indices = zip(*genotype.normal)
+            op_names, op_kwargs, indices = zip(*genotype.normal)
             concat = genotype.normal_concat
-        self._compile(C, op_names, indices, concat, reduction)
+        self._compile(C, op_names, op_kwargs, indices, concat, reduction)
 
-    def _compile(self, C, op_names, indices, concat, reduction):
-        assert len(op_names) == len(indices)
+    def _compile(self, C, op_names, op_kwargs, indices, concat, reduction):
+        assert len(op_names) == len(op_kwargs) == len(indices)
         self._steps = len(op_names) // 2
         self._concat = concat
         self.multiplier = len(concat)
 
         self._ops = nn.ModuleList()
-        for name, index in zip(op_names, indices):
+        for name, kwargs, index in zip(op_names, op_kwargs, indices):
             stride = 2 if reduction and index < 2 else 1
-            op = OPS[name](C, stride, True)
+            op = make_op(name, C, stride, True, kwargs)
             self._ops += [op]
         self._indices = indices
 
@@ -48,9 +48,9 @@ class Cell(nn.Module):
             h1 = op1(h1)
             h2 = op2(h2)
             if self.training and drop_prob > 0.:
-                if not isinstance(op1, Identity):
+                if not op1.is_identity_op():
                     h1 = drop_path(h1, drop_prob)
-                if not isinstance(op2, Identity):
+                if not op2.is_identity_op():
                     h2 = drop_path(h2, drop_prob)
             s = h1 + h2
             states += [s]
@@ -135,9 +135,9 @@ class NetworkCIFAR(nn.Module):
         self.global_pooling = nn.AdaptiveAvgPool2d(1)
         self.classifier = nn.Linear(C_prev, num_classes)
 
-    def forward(self, input):
+    def forward(self, input_):
         logits_aux = None
-        s0 = s1 = self.stem(input)
+        s0 = s1 = self.stem(input_)
         for i, cell in enumerate(self.cells):
             s0, s1 = s1, cell(s0, s1, self.drop_path_prob)
             if i == 2*self._layers//3:
@@ -146,6 +146,7 @@ class NetworkCIFAR(nn.Module):
         out = self.global_pooling(s1)
         logits = self.classifier(out.view(out.size(0),-1))
         return logits, logits_aux
+
 
 class NetworkImageNet(nn.Module):
 
@@ -188,9 +189,9 @@ class NetworkImageNet(nn.Module):
         self.global_pooling = nn.AvgPool2d(7)
         self.classifier = nn.Linear(C_prev, num_classes)
 
-    def forward(self, input):
+    def forward(self, input_):
         logits_aux = None
-        s0 = self.stem0(input)
+        s0 = self.stem0(input_)
         s1 = self.stem1(s0)
         for i, cell in enumerate(self.cells):
             s0, s1 = s1, cell(s0, s1, self.drop_path_prob)
@@ -200,4 +201,3 @@ class NetworkImageNet(nn.Module):
         out = self.global_pooling(s1)
         logits = self.classifier(out.view(out.size(0), -1))
         return logits, logits_aux
-
