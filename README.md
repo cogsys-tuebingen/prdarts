@@ -1,5 +1,5 @@
-# [Prune and Replace DARTS: Exploring vast NAS spaces with network morphisms](TODO LINK)
-by Kevin Alexander Laube and Andreas Zell
+# Prune and Replace DARTS: Exploring vast NAS spaces with network morphisms
+by Kevin Alexander Laube and Andreas Zell, [on arxiv](https://arxiv.org/submit/2735169/view)
 
 **This code is based on the implementations of
 [DARTS](https://github.com/quark0/darts) and
@@ -21,13 +21,16 @@ in the ./scripts folder.
 
 The progress and discovered cells of our DL2 search, these stats are plotted to tensorboard.
 
+https://github.com/cogsys-tuebingen/prdarts/blob/master/images/DL2_epoch_stats.pdf
+
+
 <p align="center">
-  <img src="images/DL2_epoch_stats.pdf" alt="Search"/>
+  <img src="images/DL2_epoch_stats-1.png" alt="Search"/>
 </p>
 
 <p align="center">
-  <img src="images/DL2_normal.pdf" alt="DL2normal" width="49%">
-  <img src="images/DL2_reduction.pdf" alt="DL2reduction" width="49%">
+  <img src="images/DL2_normal-1.png" alt="DL2normal" width=49%/>
+  <img src="images/DL2_reduction-1.png" alt="DL2reduction" width=49%/>
 </p>
 
 
@@ -51,7 +54,7 @@ Method                                                  | #params   | #ops      
 [sharpDARTS](https://arxiv.org/abs/1903.09900)          | 3.6M      |           | 0.8       | 2.45
 [SNAS moderate](https://arxiv.org/abs/1812.09926)       | 2.8M      | 8         | 1.5       | 2.85
 [NASP](https://arxiv.org/abs/1905.13577)                | 3.3M      | 7         | 0.2       | 2.8
-[NASP (more ops)](https://arxiv.org/abs/1905.13577)     | 7.4M      | 12         | 0.3       | 2.5
+[NASP (more ops)](https://arxiv.org/abs/1905.13577)     | 7.4M      | 12        | 0.3       | 2.5
 PR-DARTS DL1                                            | 3.2M      | 15/15     | 0.82      | 2.74      | 17.37
 PR-DARTS DL2                                            | 4.0M      | 15/15     | 0.82      | 2.51      | 15.53
 PR-DARTS DR                                             | 4.2M      | 26/39     | 0.88      | 2.55      | 16.69
@@ -59,7 +62,7 @@ PR-DARTS UR                                             | 5.4M      | 45/83     
 
 
 ## Citation
-If you use any part of this code in your research, please cite our [paper](TODO LINK):
+If you use any part of this code in your research, please cite our [paper](https://arxiv.org/submit/2735169/view):
 ```
 @article{laube2019prdarts,
   title={Exploring vast NAS spaces with network morphisms},
