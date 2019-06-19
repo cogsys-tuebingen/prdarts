@@ -1,5 +1,5 @@
 # Prune and Replace DARTS: Exploring vast NAS spaces with network morphisms
-by Kevin Alexander Laube and Andreas Zell, [on arxiv](https://arxiv.org/submit/2735169/view)
+by Kevin Alexander Laube and Andreas Zell, [on arxiv](https://arxiv.org/abs/1906.07528)
 
 **This code is based on the implementations of
 [DARTS](https://github.com/quark0/darts) and
@@ -21,16 +21,14 @@ in the ./scripts folder.
 
 The progress and discovered cells of our DL2 search, these stats are plotted to tensorboard.
 
-https://github.com/cogsys-tuebingen/prdarts/blob/master/images/DL2_epoch_stats.pdf
-
 
 <p align="center">
-  <img src="images/DL2_epoch_stats-1.png" alt="Search"/>
+    <img src="images/DL2_epoch_stats-1.png" alt="Search" width="80%"/>
 </p>
 
 <p align="center">
-  <img src="images/DL2_normal-1.png" alt="DL2normal" width=49%/>
-  <img src="images/DL2_reduction-1.png" alt="DL2reduction" width=49%/>
+    <img src="images/DL2_normal-1.png" alt="DL2normal" width=49%/>
+    <img src="images/DL2_reduction-1.png" alt="DL2reduction" width=49%/>
 </p>
 
 
@@ -62,12 +60,12 @@ PR-DARTS UR                                             | 5.4M      | 45/83     
 
 
 ## Citation
-If you use any part of this code in your research, please cite our [paper](https://arxiv.org/submit/2735169/view):
+If you use any part of this code in your research, please cite our [paper](https://arxiv.org/abs/1906.07528):
 ```
 @article{laube2019prdarts,
-  title={Exploring vast NAS spaces with network morphisms},
+  title={Prune and Replace DARTS},
   author={Kevin A. Laube and Andreas Zell},
-  journal={arXiv preprint},
+  journal={arXiv preprint https://arxiv.org/abs/1906.07528},
   year={2019}
 }
 ```
