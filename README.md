@@ -1,4 +1,4 @@
-# Prune and Replace DARTS: Exploring vast NAS spaces with network morphisms
+# Prune and Replace NAS
 by Kevin Alexander Laube and Andreas Zell, [on arxiv](https://arxiv.org/abs/1906.07528)
 
 **This code is based on the implementations of
@@ -62,8 +62,8 @@ PR-DARTS UR                                             | 5.4M      | 45/83     
 ## Citation
 If you use any part of this code in your research, please cite our [paper](https://arxiv.org/abs/1906.07528):
 ```
-@article{laube2019prdarts,
-  title={Prune and Replace DARTS},
+@article{laube2019prnas,
+  title={Prune and Replace NAS},
   author={Kevin A. Laube and Andreas Zell},
   journal={arXiv preprint https://arxiv.org/abs/1906.07528},
   year={2019}
